@@ -53,20 +53,14 @@ class User(UserMixin, db.Model):
         return followed.union(own).order_by(Post.timestamp.desc())
 
 
-    def __repr__(self):
-        return '<User {}>'.format(self.username)
-    
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-
-
-
-
-
+    def __repr__(self):
+        return '<User {}>'.format(self.username)
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
